@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- BOOTSTRAP CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <header>
+        
+        <nav class="navbar">
+            <h1><img style="width: 50px;" src="./cloud.png">Weather Dashboard<img style="width: 75px;" src="./5-57171_cumulonimbus-cloud-png-clipart-transparent-background-cloud-png.png"></h1>
+        </nav>
+    </header>
+    <div class="row">
+        <div class="col-sm-4 searchArea">
+            <h3>Search for a City:</h3>
+            <span id="error"></span>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" id="city" placeholder="Search" aria-label="Search">
+                <input type="image" id="submitCity" style="width: 200px;" src="./umbrella(3).png"/>
+            </form>
+            <br>
+            <div class="city-list"></div>
+        </div>
+        <div class="col currentCondition">
+            <div class="card">
+                <div id="show" class="card-body"></div>
+            </div>
+            <br>
+            <div class="row" id="5-day-forecast">
+                <h3>5-Day Forecast:</h3>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
