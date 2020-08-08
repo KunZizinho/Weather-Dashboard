@@ -5,8 +5,7 @@ $(document).ready(function () {
         // var lat = JSON.stringify(data.coord.lat);
         // var lon = JSON.stringify(data.coord.lon);
         // console.log("show funkcija ", lat, " lon -> ", lon)
-        console.log("provjera ", data)
-
+        console.log("provjera ", data.coord.lat, data.coord.lon, data.value)
 
         //VRATI 
         return "<h2>" + data.name + moment().format(' (MM/DD/YYYY)') + "</h2>" +
@@ -14,7 +13,7 @@ $(document).ready(function () {
         <p><strong>Temperature</strong>: ${data.main.temp} °F</p>
         <p><strong>Humidity</strong>: ${data.main.humidity}%</p>
         <p><strong>Wind Speed</strong>: ${data.wind.speed} MPH</p>
-        <p><strong>UVIndex:</strong>:${data.city}</p >
+        <p><strong>UVIndex:</strong>:${data}</p >
 
         `
     }
@@ -22,8 +21,7 @@ $(document).ready(function () {
     var apiKey = "36c4284ed2168ea3cd7cb0224510b0d9";
     var cityList = [];
     var city;
-    // let latitude = [];
-    // let longitude = [];
+    var uvIndex;
 
     function displayCities(cityList){
         // we are gonna empty out element  .city-list
@@ -97,7 +95,7 @@ $(document).ready(function () {
             url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&APPID=5650ba04d76cc8ddc64d65a07cda4c4a",
             type: "GET",
             success: function(data){
-                console.log("forecast data is here ", data)
+                // console.log("forecast data is here ", data)
                 var forecastDisplay =showForecast(data);
                 $("#show").html(forecastDisplay);
 
@@ -109,13 +107,14 @@ $(document).ready(function () {
 
 
     function showUV(lat,lon){
+        uvIndex;
 
         $.ajax({
             
             url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&APPID=5650ba04d76cc8ddc64d65a07cda4c4a",
             type: "GET",
             success: function(data){
-                console.log("city data is here ", data)
+                // console.log("city data is here ", data)
                 var display = show(data);
                 $("#show").html(display);
                 var lat = data.coord.lat;
@@ -131,20 +130,21 @@ $(document).ready(function () {
                 url: "http://api.openweathermap.org/data/2.5/uvi?appid=5650ba04d76cc8ddc64d65a07cda4c4a" + "&lat=" + lat + "&lon=" + lon,
                 type: "GET",
                 success: function (data) {
-                    console.log("Let it be!!!!!!", data)
-
-    
+                    console.log("Let it be!!!!!!", 'uvIndex', data.value)
+                    uvIndex = data.value;
+                    console.log('uv', uvIndex)
+                    return uvIndex;
                 }
             })
             
         })
-
+        console.log('uvIndex', uvIndex)
     }
 
     function showForecast(data){
         var forecast = data.list;
-        console.log("here is data ", data, " and here is forecast ", forecast)
-        showUV(data.city.coord);
+        // console.log("here is data ", data, " and here is forecast ", forecast)
+        showUV(data.city);
         console.log("here is ", data.value)
         var currentForecast = []
         
